@@ -1,0 +1,490 @@
+useful linux commands
+
+#1 
+cat command
+
+eg: cat filename, cat -n filename
+    cat > newFileName
+    cat filename1 > filename2 (copying)
+
+#2 
+cd command
+
+eg: cd /
+    cd ..
+    cd /path/to/directory/
+
+#3
+cp command
+
+eg: cp filename1 filename2 directoryName
+
+#4
+ls command
+
+eg: ls
+    ls -l, ls -t
+    
+#5, #6, #7, #8, #9
+pwd
+mkdir dirname
+rmdir dirname, 
+rm -rf dirname
+rm filename
+
+#10
+touch filename (createfile, Updates access and 		modification time)
+
+#11
+chmod
+
+eg: chmod +rx filename
+
+#12
+tail filename (displays last 10 lines)
+
+eg: tail -n 5 filename
+
+#13
+head filename (displays first 10 lines)
+
+eg: head -n 5 filename
+
+#14
+mv command
+
+eg: mv oldName.txt newName.txt
+
+#15
+grep command
+
+eg: grep -i "UNix" toSearchFile.txt
+    (case insen.)
+    grep -c "UNix" toSearchFile.txt
+    (counts matching patterns)
+    grep -l "unix" *
+    (to search for pattern in filenames)
+    grep -w "unix" file.txt
+    (finds whole words, not substr)
+    grep "^unix" file.txt
+    ( ^ regular expression pattern specifies the start of a line, use $ for end)
+    grep –f pattern.txt  file.txt
+	pattern.txt -> contains regexs, one per line
+
+	-n for linenumbers
+	-v for mismatched parts
+
+#16
+tree command
+
+eg: tree -a ./dirname
+Display the tree hierarchy of a directory
+	
+#17
+find command
+(searching by file, folder, name, creation date, modification date, owner and permissions)
+
+eg: find [where to start searching from]
+ [expression determines what to find] [-options] [what to find]
+
+    find ./dirname -name sample.txt
+
+
+#18
+more
+
+eg: more -d sample.txt
+   (displays one screen at a time if file is large, with navigation444)
+
+#19
+cut
+    cut -c 1-7 file.txt
+    (displays perline, characters 1 to 7)
+
+#19
+sort
+   sort filename.txt
+   -r -> reverse order, -n -> numerically
+   sort -k 2n file.txt
+   (sorts on the basis of column 2)
+
+#20
+wc
+   wc filename.txt
+   count words
+    (displays number of lines, words and characters)
+    -l (only lines)
+    -w (only words)
+    -c (only bytes)
+
+#21
+vi filename
+ Command Mode: 
+When vi starts up, it is in Command Mode. This mode is where vi interprets any characters we type as commands and thus does not display them in the window. This mode allows us to move through a file, and to delete, copy, or paste a piece of text.
+To enter into Command Mode from any other mode, it requires pressing the [Esc] key. If we press [Esc] when we are already in Command Mode, then vi will beep or flash the screen.
+
+ Insert mode: This mode enables you to insert text into the file. Everything that’s typed in this mode is interpreted as input and finally, it is put in the file. The vi always starts in command mode. To enter text, you must be in insert mode. To come in insert mode you simply type i. To get out of insert mode, press the Esc key, which will put you back into command mode.
+
+ Last Line Mode(Escape Mode): Line Mode is invoked by typing a colon [:], while vi is in Command Mode. The cursor will jump to the last line of the screen and vi will wait for a command. This mode enables you to perform tasks such as saving files, executing commands.
+
+#22
+nano filename
+ (ctrl+o enter, ctrl x)
+
+#23
+awk
+
+AWK Operations:
+(a) Scans a file line by line
+(b) Splits each input line into fields
+(c) Compares input line/fields to pattern
+(d) Performs action(s) on matched lines
+
+eg:
+cat > employee.txt 
+
+ 
+
+awk '{print}' employee.txt
+(prints file)
+
+awk '/manager/ {print}' employee.txt 
+(prints lines with regex: manager)
+
+awk '{print $1,$4}' employee.txt 
+(prints column1 and column 4)
+
+
+
+cmp file1.txt file2.txt
+
+output
+file1.txt file2.txt differ: byte 9, line 2
+
+ /*indicating that the first mismatch found in
+ two files at byte 20 in second line*/
+
+
+######  Piping #######
+
+command_1 | command_2 | command_3 | .... | command_N 
+
+eg: ls -l | more
+    sort record.txt | uniq 
+    (sort and print unique values)
+    cat sample2.txt | head -7 | tail -5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+terminal log:
+
+sougata@sougata-Virtual-Machine:~/Downloads$ ls
+jenkins.war
+sougata@sougata-Virtual-Machine:~/Downloads$ cd ..
+sougata@sougata-Virtual-Machine:~$ ls
+Desktop    Downloads         Music     Public         temp       Templates
+Documents  examples.desktop  Pictures  shared-drives  temp2_git  Videos
+sougata@sougata-Virtual-Machine:~$ cd Documents/
+sougata@sougata-Virtual-Machine:~/Documents$ ls
+sh_scr.sh  temp  useful.txt  useful_unix.txt
+sougata@sougata-Virtual-Machine:~/Documents$ cd temp/
+sougata@sougata-Virtual-Machine:~/Documents/temp$ ls
+clones  employee.txt  newFile.txt  patternFile.txt  textFile.txt  textFile.txt.save
+sougata@sougata-Virtual-Machine:~/Documents/temp$ nano textFile.txt
+sougata@sougata-Virtual-Machine:~/Documents/temp$ su
+Password: 
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# nano textFile.txt
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# rm textFile.txt.save 
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# ls
+clones  employee.txt  newFile.txt  patternFile.txt  textFile.txt
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# cat employee.txt 
+ajay manager account 45000
+sunil clerk account 25000
+varun manager sales 50000
+amit manager account 47000
+tarun peon sales 15000
+deepak clerk sales 23000
+sunil peon sales 13000
+satvik director purchase 80000
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# awk '{print}' employee.txt 
+ajay manager account 45000
+sunil clerk account 25000
+varun manager sales 50000
+amit manager account 47000
+tarun peon sales 15000
+deepak clerk sales 23000
+sunil peon sales 13000
+satvik director purchase 80000
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# awk '/sales/ {print}' employee.txt 
+varun manager sales 50000
+tarun peon sales 15000
+deepak clerk sales 23000
+sunil peon sales 13000
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# awk '{print $1, $4}' employee.txt 
+ajay 45000
+sunil 25000
+varun 50000
+amit 47000
+tarun 15000
+deepak 23000
+sunil 13000
+satvik 80000
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# cmp employee.txt textFile.txt 
+employee.txt textFile.txt differ: byte 1, line 1
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# sort -k 4 -n employee.txt 
+sunil peon sales 13000
+tarun peon sales 15000
+deepak clerk sales 23000
+sunil clerk account 25000
+ajay manager account 45000
+amit manager account 47000
+varun manager sales 50000
+satvik director purchase 80000
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# sort -k 4 -n employee.txt | tail -3
+amit manager account 47000
+varun manager sales 50000
+satvik director purchase 80000
+root@sougata-Virtual-Machine:/home/sougata/Documents/temp# cd ..
+root@sougata-Virtual-Machine:/home/sougata/Documents# ls
+sh_scr.sh  temp  useful.txt  useful_unix.txt
+root@sougata-Virtual-Machine:/home/sougata/Documents# nano sh_scr.sh 
+root@sougata-Virtual-Machine:/home/sougata/Documents# ./sh_scr.sh 
+0 
+1 0 
+2 1 0 
+3 2 1 0 
+4 3 2 1 0 
+5 4 3 2 1 0 
+6 5 4 3 2 1 0 
+7 6 5 4 3 2 1 0 
+8 7 6 5 4 3 2 1 0 
+9 8 7 6 5 4 3 2 1 0 
+openjdk 11.0.9.1 2020-11-04
+OpenJDK Runtime Environment (build 11.0.9.1+1-Ubuntu-0ubuntu1.18.04)
+OpenJDK 64-Bit Server VM (build 11.0.9.1+1-Ubuntu-0ubuntu1.18.04, mixed mode, sharing)
+git version 2.17.1
+Apache Maven 3.6.0
+Maven home: /usr/share/maven
+Java version: 11.0.9.1, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+Default locale: en_IN, platform encoding: UTF-8
+OS name: "linux", version: "5.4.0-1034-azure", arch: "amd64", family: "unix"
+root@sougata-Virtual-Machine:/home/sougata/Documents# nano sh_scr.sh 
+root@sougata-Virtual-Machine:/home/sougata/Documents# nano sh_scr.sh 
+root@sougata-Virtual-Machine:/home/sougata/Documents# ./sh_scr.sh 
+0 
+1 0 
+2 1 0 
+3 2 1 0 
+4 3 2 1 0 
+5 4 3 2 1 0 
+6 5 4 3 2 1 0 
+7 6 5 4 3 2 1 0 
+8 7 6 5 4 3 2 1 0 
+9 8 7 6 5 4 3 2 1 0 
+root@sougata-Virtual-Machine:/home/sougata/Documents# mkdir gitTemp
+root@sougata-Virtual-Machine:/home/sougata/Documents# cd gitTemp/
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# javac Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# java Main
+helloroot@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git init
+Initialized empty Git repository in /home/sougata/Documents/gitTemp/.git/
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git branch
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git add .
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git commit "very first commit"
+error: pathspec 'very first commit' did not match any file(s) known to git.
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git commit -m "very first commit"
+[master (root-commit) ae97484] very first commit
+ 2 files changed, 5 insertions(+)
+ create mode 100644 Main.class
+ create mode 100644 Main.java
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git branch
+* master
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git branch feature
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git checkout feature
+Switched to branch 'feature'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# cat Main.java 
+class Main{
+	public static void main(String[] args){
+		System.out.print("hello");
+
+		System.out.print("Added in feature");
+	}
+}
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git checkout master
+M	Main.java
+Switched to branch 'master'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# cat Main.java 
+class Main{
+	public static void main(String[] args){
+		System.out.print("hello");
+
+		System.out.print("Added in feature");
+	}
+}
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git checkout feature
+M	Main.java
+Switched to branch 'feature'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git add .
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git commit -m "feature #1 commit"
+[feature be281e0] feature #1 commit
+ 1 file changed, 2 insertions(+)
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git checkout master
+Switched to branch 'master'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git checkout feature
+Switched to branch 'feature'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git checkout master
+Switched to branch 'master'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git merge feature
+Updating ae97484..be281e0
+Fast-forward
+ Main.java | 2 ++
+ 1 file changed, 2 insertions(+)
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git log
+commit be281e0e7dc367f0e6f15c43ad2f429fa3a55d4e (HEAD -> master, feature)
+Author: Sougata Ghosh <sougataghosh314@gmail.com>
+Date:   Wed Dec 30 10:10:05 2020 +0530
+
+    feature #1 commit
+
+commit ae97484042c417c74d39cc29a8ef7ed8441a79a9
+Author: Sougata Ghosh <sougataghosh314@gmail.com>
+Date:   Wed Dec 30 10:07:11 2020 +0530
+
+    very first commit
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git branch
+  feature
+* master
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git add .
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git commit -m "master commit #2"
+[master 93756ab] master commit #2
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git checkout feature
+Switched to branch 'feature'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git rebase master
+First, rewinding head to replay your work on top of it...
+Fast-forwarded feature to master.
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git branch
+* feature
+  master
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# nano Main.java 
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git add .
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git commit -m "feature #2 commit"
+On branch feature
+nothing to commit, working tree clean
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git log
+commit 93756ab1d4377fd6ca6ae26ea2284e8254a6a8ce (HEAD -> feature, master)
+Author: Sougata Ghosh <sougataghosh314@gmail.com>
+Date:   Wed Dec 30 10:12:40 2020 +0530
+
+    master commit #2
+
+commit be281e0e7dc367f0e6f15c43ad2f429fa3a55d4e
+Author: Sougata Ghosh <sougataghosh314@gmail.com>
+Date:   Wed Dec 30 10:10:05 2020 +0530
+
+    feature #1 commit
+
+commit ae97484042c417c74d39cc29a8ef7ed8441a79a9
+Author: Sougata Ghosh <sougataghosh314@gmail.com>
+Date:   Wed Dec 30 10:07:11 2020 +0530
+
+    very first commit
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git status
+On branch feature
+nothing to commit, working tree clean
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git --config
+unknown option: --config
+usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           <command> [<args>]
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git remote add origin "https://github.com/SougataGhosh314/pipelineScript.git"
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git remote -v
+origin	https://github.com/SougataGhosh314/pipelineScript.git (fetch)
+origin	https://github.com/SougataGhosh314/pipelineScript.git (push)
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# ls
+Main.class  Main.java
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git push origin main
+error: src refspec main does not match any.
+error: failed to push some refs to 'https://github.com/SougataGhosh314/pipelineScript.git'
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# git push origin master
+Username for 'https://github.com': SougataGhosh314
+Password for 'https://SougataGhosh314@github.com': 
+Counting objects: 10, done.
+Compressing objects: 100% (10/10), done.
+Writing objects: 100% (10/10), 1.13 KiB | 290.00 KiB/s, done.
+Total 10 (delta 2), reused 0 (delta 0)
+remote: Resolving deltas: 100% (2/2), done.
+remote: 
+remote: Create a pull request for 'master' on GitHub by visiting:
+remote:      https://github.com/SougataGhosh314/pipelineScript/pull/new/master
+remote: 
+To https://github.com/SougataGhosh314/pipelineScript.git
+ * [new branch]      master -> master
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# ^C
+root@sougata-Virtual-Machine:/home/sougata/Documents/gitTemp# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

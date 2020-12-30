@@ -1,0 +1,25 @@
+some more useful commands:
+
+apt install default-jre
+ 
+apt install default-jdk
+
+apt install maven
+
+apt install git
+
+ufw allow 8080
+
+ufw allow OpenSSH
+
+ufw status
+
+ufw enable
+
+java -jar jenkins.war --httpPort=<portno>
+
+fuser -k 8080/tcp
+
+
+
+
